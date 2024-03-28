@@ -1,5 +1,6 @@
 package com.example.notesapp.fragment
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.InputQueue
 import androidx.fragment.app.Fragment
@@ -9,6 +10,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 
 import androidx.core.view.MenuHost
@@ -25,7 +27,7 @@ import com.example.notesapp.model.Note
 import com.example.notesapp.viewmodel.NotesViewModel
 
 
-class HomeFragment : Fragment(R.layout.fragment_home),SearchView.OnQueryTextListener,MenuProvider {
+class HomeFragment : Fragment(R.layout.fragment_home),SearchView.OnQueryTextListener,MenuProvider, NoteAdapter.OnClickListner {
 
     private var homeBinding:FragmentHomeBinding?=null
     private lateinit var noteAdapter: NoteAdapter
@@ -74,6 +76,7 @@ class HomeFragment : Fragment(R.layout.fragment_home),SearchView.OnQueryTextList
     }
     private fun setupHomeRecyclerView(){
         noteAdapter= NoteAdapter()
+        noteAdapter.setOnClickListener(this)
         binding.homeRecyclerView.apply {
             layoutManager=StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL)
             setHasFixedSize(true)
@@ -120,6 +123,26 @@ class HomeFragment : Fragment(R.layout.fragment_home),SearchView.OnQueryTextList
     override fun onMenuItemSelected(menuItem: MenuItem): Boolean
     {
         return false
+    }
+
+    override fun deleteNote(currentNote: Note)
+    {
+        AlertDialog.Builder(activity).apply {
+            setTitle("Delete Note")
+            setMessage("Do you want to delete this note?")
+            setPositiveButton("Delete"){_,_ ->
+                notesViewModel.deleteNote(currentNote)
+                Toast.makeText(context, "note deleted", Toast.LENGTH_SHORT).show()
+                view?.findNavController()?.popBackStack(R.id.homeFragment,false)
+
+            }
+            setNegativeButton("cancel",null)
+        }.create().show()
+    }
+
+    override fun onNoteClicked(note: Note) {
+        val direction=HomeFragmentDirections.actionHomeFragmentToEditFragment(note)
+        binding.root.findNavController().navigate(direction)
     }
 
     override fun onDestroy() {

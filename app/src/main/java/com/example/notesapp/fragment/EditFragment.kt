@@ -17,6 +17,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.notesapp.MainActivity
 import com.example.notesapp.R
+import com.example.notesapp.adapter.NoteAdapter
 import com.example.notesapp.databinding.FragmentEditBinding
 import com.example.notesapp.model.Note
 import com.example.notesapp.viewmodel.NotesViewModel
@@ -84,6 +85,7 @@ class EditFragment : Fragment(R.layout.fragment_edit),MenuProvider {
             setNegativeButton("cancel",null)
         }.create().show()
     }
+
 
     override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
          menu.clear()
