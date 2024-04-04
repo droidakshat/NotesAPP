@@ -2,7 +2,6 @@ package com.example.notesapp.fragment
 
 import android.app.AlertDialog
 import android.os.Bundle
-import android.view.InputQueue
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.Menu
@@ -17,12 +16,13 @@ import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.navArgs
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.example.notesapp.MainActivity
 import com.example.notesapp.R
 import com.example.notesapp.adapter.NoteAdapter
 import com.example.notesapp.databinding.FragmentHomeBinding
+import com.example.notesapp.fragment.reminder.ReminderFragment
 import com.example.notesapp.model.Note
 import com.example.notesapp.viewmodel.NotesViewModel
 
@@ -33,6 +33,7 @@ class HomeFragment : Fragment(R.layout.fragment_home),SearchView.OnQueryTextList
     private lateinit var noteAdapter: NoteAdapter
     private val binding get() = homeBinding!!
     private lateinit var notesViewModel: NotesViewModel
+
 
 
 
@@ -52,13 +53,29 @@ class HomeFragment : Fragment(R.layout.fragment_home),SearchView.OnQueryTextList
         val menuHost:MenuHost=requireActivity()
         menuHost.addMenuProvider(this,viewLifecycleOwner)
 
-      // notesViewModel=(activity as MainActivity).NotesViewModel
+    //   notesViewModel=(activity as MainActivity).NotesViewModel
+        binding.bnNoteReminder.setOnItemSelectedListener { menuItem->
+            when(menuItem.itemId) {
+                R.id.person -> {
+                   findNavController().navigate(R.id.homeFragment)
+                    true
+                }
+                R.id.home->{
+                    findNavController().navigate(R.id.reminderFragment)
+                     true
+                }
+                // Add more cases for other menu items if needed
+                else -> false
+            }
+        }
         notesViewModel = ViewModelProvider(requireActivity()).get(NotesViewModel::class.java)
 
 
+
         binding.addNoteFab.setOnClickListener{
-            it.findNavController().navigate(R.id.action_homeFragment_to_addFragment)
+           it.findNavController().navigate(R.id.action_homeFragment_to_addFragment)
         }
+
         setupHomeRecyclerView()
     }
     private fun updateUI(note:List<Note>?){
@@ -74,6 +91,7 @@ class HomeFragment : Fragment(R.layout.fragment_home),SearchView.OnQueryTextList
             }
         }
     }
+
     private fun setupHomeRecyclerView(){
         noteAdapter= NoteAdapter()
         noteAdapter.setOnClickListener(this)

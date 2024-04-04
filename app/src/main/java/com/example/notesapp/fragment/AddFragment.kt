@@ -13,12 +13,10 @@ import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
-import com.example.notesapp.MainActivity
 
 import com.example.notesapp.R
 import com.example.notesapp.databinding.FragmentAddBinding
 import com.example.notesapp.model.Note
-import com.example.notesapp.viewmodel.NoteViewMOdelfactory
 import com.example.notesapp.viewmodel.NotesViewModel
 
 class AddFragment : Fragment(R.layout.fragment_add), MenuProvider {
