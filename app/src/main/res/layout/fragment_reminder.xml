@@ -11,15 +11,29 @@ tools:context=".fragment.reminder.ReminderFragment">
     android:id="@+id/secondFragment"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="Data Structures"
-    android:textColor="#43a047"
-    android:textSize="40sp"
-    android:textStyle="italic|bold"
+    android:text="Add Reminder"
+    android:textColor="#242B24"
+    android:textSize="25sp"
+    android:textStyle="normal"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintHorizontal_bias="0.5"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addNoteFab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="28dp"
+        android:backgroundTint="@color/yellow"
+        android:clickable="true"
+        android:contentDescription="image"
+        android:tintMode="@color/white"
+        app:layout_constraintBottom_toTopOf="@id/bn_NoteReminder"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/baseline_add_24" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bn_NoteReminder"
