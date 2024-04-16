@@ -20,8 +20,8 @@ class AlarmReceiver : BroadcastReceiver() {
 
         val builder = NotificationCompat.Builder(context!!, "ak1")
             .setSmallIcon(R.drawable.logo)
-            .setContentTitle("NotesApp")
-            .setContentText("Reminder Alert!Nigga")
+            .setContentTitle("Reminder Alert!")
+            .setContentText("Time is over. do your work")
             .setAutoCancel(true)
             .setDefaults(NotificationCompat.DEFAULT_ALL)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
