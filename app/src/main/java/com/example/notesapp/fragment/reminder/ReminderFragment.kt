@@ -130,8 +130,7 @@ class ReminderFragment : Fragment(R.layout.fragment_reminder) {
 
         savesetalarm?.setOnClickListener {
             if (hour != null && min != null) {
-          //     val rem=reminderTitle?.text.toString() // Assuming ReminderTitle is your EditText
-                if (reminderTitle.isNotBlank()) {
+                 if (reminderTitle.isNotBlank()) {
                     setAlarm( hour!!, min!!)
                     bottomSheetDialog.dismiss()
                 } else {
